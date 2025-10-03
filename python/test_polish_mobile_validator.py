@@ -14,7 +14,7 @@ class TestPolishMobileValidator(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         self.validator = PolishMobileValidator()
-        csv_path = os.path.join(os.path.dirname(__file__), '..', 'Mobileprefix.csv')
+        csv_path = os.path.join(os.path.dirname(__file__), '..', 'Mobileprefix_corrected.csv')
         if os.path.exists(csv_path):
             self.validator_with_csv = PolishMobileValidator(csv_path)
         else:
@@ -100,13 +100,13 @@ class TestPolishMobileValidator(unittest.TestCase):
 
     def test_recognize_play_operator(self):
         """Test recognition of Play operator"""
-        result = self.validator.recognize_operator('721234567')
+        result = self.validator.recognize_operator('531234567')
         self.assertTrue(result['success'])
         self.assertEqual(result['operator'], 'Play')
 
     def test_recognize_tmobile_operator(self):
         """Test recognition of T-Mobile operator"""
-        result = self.validator.recognize_operator('451234567')
+        result = self.validator.recognize_operator('601234567')
         self.assertTrue(result['success'])
         self.assertEqual(result['operator'], 'T-Mobile')
 
@@ -126,6 +126,8 @@ class TestPolishMobileValidator(unittest.TestCase):
         """Test M2M detection for M2M number"""
         result = self.validator.is_m2m_number('211234567')
         self.assertTrue(result)
+        result = self.validator.is_m2m_number('691234567')
+        self.assertTrue(result)
 
     def test_is_m2m_number_false(self):
         """Test M2M detection for non-M2M number"""
@@ -143,11 +145,11 @@ class TestPolishMobileValidator(unittest.TestCase):
 
     def test_get_operator_by_prefix_play(self):
         """Test get operator by Play prefix"""
-        self.assertEqual(self.validator.get_operator_by_prefix('72'), 'Play')
+        self.assertEqual(self.validator.get_operator_by_prefix('53'), 'Play')
 
     def test_get_operator_by_prefix_tmobile(self):
         """Test get operator by T-Mobile prefix"""
-        self.assertEqual(self.validator.get_operator_by_prefix('45'), 'T-Mobile')
+        self.assertEqual(self.validator.get_operator_by_prefix('60'), 'T-Mobile')
 
     def test_get_operator_by_prefix_plus(self):
         """Test get operator by Plus prefix"""
@@ -168,11 +170,13 @@ class TestPolishMobileValidator(unittest.TestCase):
         """Test getting operator prefixes mapping"""
         mapping = self.validator.get_operator_prefixes()
         self.assertIn('57', mapping['Orange'])
-        self.assertIn('60', mapping['Play'])
+        self.assertIn('53', mapping['Play'])
+        self.assertIn('60', mapping['T-Mobile'])
+        self.assertIn('69', mapping['Plus'])
 
     def test_batch_validate_multiple_numbers(self):
         """Test batch validation with multiple valid numbers"""
-        numbers = ['501234567', '721234567', '881234567']
+        numbers = ['501234567', '531234567', '881234567']
         results = self.validator.batch_validate(numbers)
         
         self.assertEqual(len(results), 3)
@@ -217,7 +221,7 @@ class TestPolishMobileValidator(unittest.TestCase):
 
     def test_all_play_prefixes(self):
         """Test all Play prefixes"""
-        play_prefixes = ['53', '60', '72', '73', '78', '79']
+        play_prefixes = ['53', '79']
         for prefix in play_prefixes:
             result = self.validator.recognize_operator(f'{prefix}1234567')
             self.assertTrue(result['success'])
@@ -230,7 +234,7 @@ class TestPolishMobileValidator(unittest.TestCase):
 
     def test_all_orange_prefixes(self):
         """Test Orange prefixes"""
-        orange_prefixes = ['50', '51', '57', '66', '69']
+        orange_prefixes = ['50', '51', '57', '78']
         for prefix in orange_prefixes:
             result = self.validator.recognize_operator(f'{prefix}1234567')
             self.assertTrue(result['success'])
@@ -238,7 +242,7 @@ class TestPolishMobileValidator(unittest.TestCase):
 
     def test_all_tmobile_prefixes(self):
         """Test T-Mobile prefixes"""
-        tmobile_prefixes = ['45', '88']
+        tmobile_prefixes = ['45', '60', '66', '72', '73', '88']
         for prefix in tmobile_prefixes:
             result = self.validator.recognize_operator(f'{prefix}1234567')
             self.assertTrue(result['success'])

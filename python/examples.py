@@ -22,15 +22,16 @@ def main():
     validator = PolishMobileValidator()
 
     # Load CSV database for detailed information
-    csv_path = os.path.join(os.path.dirname(__file__), '..', 'Mobileprefix.csv')
+    csv_path = os.path.join(os.path.dirname(__file__), '..', 'Mobileprefix_corrected.csv')
     validator_with_db = PolishMobileValidator(csv_path)
 
     # Test phone numbers
     test_numbers = [
         {'number': '501234567', 'description': 'Orange number'},
-        {'number': '+48721234567', 'description': 'Play number with country code'},
-        {'number': '881234567', 'description': 'T-Mobile number'},
-        {'number': '211234567', 'description': 'Plus/M2M number'},
+        {'number': '+48531234567', 'description': 'Play number with country code'},
+        {'number': '601234567', 'description': 'T-Mobile number'},
+        {'number': '211234567', 'description': 'Plus/M2M number (21)'},
+        {'number': '691234567', 'description': 'Plus/M2M number (69)'},
         {'number': '991234567', 'description': 'Invalid prefix'},
         {'number': '50123456', 'description': 'Invalid length'},
         {'number': '(501) 234-567', 'description': 'Number with formatting'}
@@ -68,7 +69,7 @@ def main():
     print_separator()
     print('EXAMPLE 3: Batch Validation')
     print_separator('-')
-    batch_numbers = ['501234567', '721234567', '881234567', '211234567']
+    batch_numbers = ['501234567', '531234567', '601234567', '691234567']
     print('\nValidating multiple numbers at once...')
     results = validator.batch_validate(batch_numbers)
 
@@ -82,7 +83,7 @@ def main():
     print_separator()
     print('EXAMPLE 4: M2M Detection')
     print_separator('-')
-    m2m_test = ['211234567', '501234567', '721234567']
+    m2m_test = ['211234567', '691234567', '501234567', '531234567']
     print('\nChecking for Machine-to-Machine numbers...')
     for number in m2m_test:
         is_m2m = validator.is_m2m_number(number)

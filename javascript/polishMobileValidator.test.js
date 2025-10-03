@@ -11,7 +11,7 @@ describe('PolishMobileValidator', () => {
 
     beforeEach(() => {
         validator = new PolishMobileValidator();
-        const csvPath = path.join(__dirname, '..', 'Mobileprefix.csv');
+        const csvPath = path.join(__dirname, '..', 'Mobileprefix_corrected.csv');
         validatorWithCSV = new PolishMobileValidator(csvPath);
     });
 
@@ -93,13 +93,13 @@ describe('PolishMobileValidator', () => {
         });
 
         test('should recognize Play operator', () => {
-            const result = validator.recognizeOperator('721234567');
+            const result = validator.recognizeOperator('531234567');
             expect(result.success).toBe(true);
             expect(result.operator).toBe('Play');
         });
 
         test('should recognize T-Mobile operator', () => {
-            const result = validator.recognizeOperator('451234567');
+            const result = validator.recognizeOperator('601234567');
             expect(result.success).toBe(true);
             expect(result.operator).toBe('T-Mobile');
         });
@@ -126,6 +126,7 @@ describe('PolishMobileValidator', () => {
     describe('M2M Detection', () => {
         test('should detect M2M number', () => {
             expect(validator.isM2MNumber('211234567')).toBe(true);
+            expect(validator.isM2MNumber('691234567')).toBe(true);
         });
 
         test('should not detect non-M2M number', () => {
@@ -140,9 +141,10 @@ describe('PolishMobileValidator', () => {
     describe('Prefix Operations', () => {
         test('should get operator by prefix', () => {
             expect(validator.getOperatorByPrefix('50')).toBe('Orange');
-            expect(validator.getOperatorByPrefix('72')).toBe('Play');
-            expect(validator.getOperatorByPrefix('45')).toBe('T-Mobile');
+            expect(validator.getOperatorByPrefix('53')).toBe('Play');
+            expect(validator.getOperatorByPrefix('60')).toBe('T-Mobile');
             expect(validator.getOperatorByPrefix('21')).toBe('Plus');
+            expect(validator.getOperatorByPrefix('69')).toBe('Plus');
         });
 
         test('should return Unknown for invalid prefix', () => {
@@ -159,13 +161,15 @@ describe('PolishMobileValidator', () => {
         test('should get operator prefixes mapping', () => {
             const mapping = validator.getOperatorPrefixes();
             expect(mapping['Orange']).toContain('57');
-            expect(mapping['Play']).toContain('60');
+            expect(mapping['Play']).toContain('53');
+            expect(mapping['T-Mobile']).toContain('60');
+            expect(mapping['Plus']).toContain('69');
         });
     });
 
     describe('Batch Validation', () => {
         test('should validate multiple numbers', () => {
-            const numbers = ['501234567', '721234567', '881234567'];
+            const numbers = ['501234567', '531234567', '881234567'];
             const results = validator.batchValidate(numbers);
             
             expect(results.length).toBe(3);
@@ -214,7 +218,7 @@ describe('PolishMobileValidator', () => {
 
     describe('Edge Cases', () => {
         test('should handle various Orange prefixes', () => {
-            ['50', '51', '57', '66', '69'].forEach(prefix => {
+            ['50', '51', '57', '78'].forEach(prefix => {
                 const result = validator.recognizeOperator(`${prefix}1234567`);
                 expect(result.success).toBe(true);
                 expect(result.operator).toBe('Orange');
@@ -222,7 +226,7 @@ describe('PolishMobileValidator', () => {
         });
 
         test('should handle all Play prefixes', () => {
-            ['53', '60', '72', '73', '78', '79'].forEach(prefix => {
+            ['53', '79'].forEach(prefix => {
                 const result = validator.recognizeOperator(`${prefix}1234567`);
                 expect(result.success).toBe(true);
                 expect(result.operator).toBe('Play');

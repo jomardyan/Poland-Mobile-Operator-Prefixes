@@ -22,13 +22,16 @@ class PolishMobileValidator:
             csv_path: Optional path to CSV file containing prefix database
         """
         self.prefix_database: Dict[str, str] = {}
+        # Updated based on dominant operator for each prefix in Mobileprefix_corrected.csv
         self.operator_prefixes = {
-            'Play': ['53', '60', '72', '73', '78', '79'],
-            'Orange': ['50', '51', '57', '66', '69'],
-            'T-Mobile': ['45', '88'],
-            'Plus': ['21']
+            'Play': ['53', '79'],
+            'Orange': ['50', '51', '57', '78'],
+            'T-Mobile': ['45', '60', '66', '72', '73', '88'],
+            'Plus': ['21', '69']
         }
-        self.valid_prefixes = ['21', '45', '50', '51', '53', '57', '60', '66', '69', '72', '73', '78', '79', '88']
+        self.valid_prefixes = [
+            '21', '45', '50', '51', '53', '57', '60', '66', '69', '72', '73', '78', '79', '88'
+        ]
         
         if csv_path:
             self.load_prefix_database(csv_path)
@@ -150,8 +153,8 @@ class PolishMobileValidator:
                 main_operator = operator
                 break
         
-        # Check if it's M2M
-        is_m2m = prefix == '21'
+        # Check if it's M2M (prefixes 21 and 69)
+        is_m2m = prefix == '21' or prefix == '69'
         
         return {
             'success': True,
@@ -190,7 +193,8 @@ class PolishMobileValidator:
             True if M2M, False otherwise
         """
         normalized = self.normalize_phone_number(phone_number)
-        return normalized.startswith('21')
+        prefix = normalized[:2]
+        return prefix == '21' or prefix == '69'
 
     def get_valid_prefixes(self) -> List[str]:
         """

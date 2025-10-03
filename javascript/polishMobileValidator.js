@@ -10,13 +10,16 @@ const path = require('path');
 class PolishMobileValidator {
     constructor(csvPath = null) {
         this.prefixDatabase = new Map();
+        // Updated based on dominant operator for each prefix in Mobileprefix_corrected.csv
         this.operatorPrefixes = {
-            'Play': ['53', '60', '72', '73', '78', '79'],
-            'Orange': ['50', '51', '57', '66', '69'],
-            'T-Mobile': ['45', '88'],
-            'Plus': ['21']
+            'Play': ['53', '79'],
+            'Orange': ['50', '51', '57', '78'],
+            'T-Mobile': ['45', '60', '66', '72', '73', '88'],
+            'Plus': ['21', '69']
         };
-        this.validPrefixes = ['21', '45', '50', '51', '53', '57', '60', '66', '69', '72', '73', '78', '79', '88'];
+        this.validPrefixes = [
+            '21', '45', '50', '51', '53', '57', '60', '66', '69', '72', '73', '78', '79', '88'
+        ];
         
         if (csvPath) {
             this.loadPrefixDatabase(csvPath);
@@ -140,8 +143,8 @@ class PolishMobileValidator {
             }
         }
         
-        // Check if it's M2M
-        const isM2M = prefix === '21';
+        // Check if it's M2M (prefixes 21 and 69)
+        const isM2M = prefix === '21' || prefix === '69';
         
         return {
             success: true,
@@ -176,7 +179,8 @@ class PolishMobileValidator {
      */
     isM2MNumber(phoneNumber) {
         const normalized = this.normalizePhoneNumber(phoneNumber);
-        return normalized.startsWith('21');
+        const prefix = normalized.substring(0, 2);
+        return prefix === '21' || prefix === '69';
     }
 
     /**

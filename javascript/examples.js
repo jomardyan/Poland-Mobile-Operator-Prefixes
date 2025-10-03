@@ -15,15 +15,16 @@ console.log();
 const validator = new PolishMobileValidator();
 
 // Load CSV database for detailed information
-const csvPath = path.join(__dirname, '..', 'Mobileprefix.csv');
+const csvPath = path.join(__dirname, '..', 'Mobileprefix_corrected.csv');
 const validatorWithDB = new PolishMobileValidator(csvPath);
 
 // Test phone numbers
 const testNumbers = [
     { number: '501234567', description: 'Orange number' },
-    { number: '+48721234567', description: 'Play number with country code' },
-    { number: '881234567', description: 'T-Mobile number' },
-    { number: '211234567', description: 'Plus/M2M number' },
+    { number: '+48531234567', description: 'Play number with country code' },
+    { number: '601234567', description: 'T-Mobile number' },
+    { number: '211234567', description: 'Plus/M2M number (21)' },
+    { number: '691234567', description: 'Plus/M2M number (69)' },
     { number: '991234567', description: 'Invalid prefix' },
     { number: '50123456', description: 'Invalid length' },
     { number: '(501) 234-567', description: 'Number with formatting' }
@@ -61,7 +62,7 @@ console.log(`Spaced:        ${validator.formatPhoneNumber(formatNumber, 'spaced'
 console.log('\n\n' + '='.repeat(70));
 console.log('EXAMPLE 3: Batch Validation');
 console.log('-'.repeat(70));
-const batchNumbers = ['501234567', '721234567', '881234567', '211234567'];
+const batchNumbers = ['501234567', '531234567', '601234567', '691234567'];
 console.log('\nValidating multiple numbers at once...');
 const results = validator.batchValidate(batchNumbers);
 
@@ -75,7 +76,7 @@ results.forEach(result => {
 console.log('\n\n' + '='.repeat(70));
 console.log('EXAMPLE 4: M2M Detection');
 console.log('-'.repeat(70));
-const m2mTest = ['211234567', '501234567', '721234567'];
+const m2mTest = ['211234567', '691234567', '501234567', '531234567'];
 console.log('\nChecking for Machine-to-Machine numbers...');
 m2mTest.forEach(number => {
     const isM2M = validator.isM2MNumber(number);
