@@ -1,6 +1,4 @@
-# 🇵🇱 Poland Mobile Operator Prefixes
-
-## Opis po polsku
+## Opis
 
 **Walidator i system rozpoznawania operatorów polskich numerów telefonów komórkowych**
 
