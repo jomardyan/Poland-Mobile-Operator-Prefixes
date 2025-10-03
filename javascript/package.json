@@ -1,11 +1,13 @@
 {
   "name": "polish-mobile-validator",
-  "version": "1.0.0",
-  "description": "Polish mobile number validator and operator recognition framework",
+  "version": "2.0.0",
+  "description": "Polish mobile number validator and operator recognition framework with Ajax and real-time event listeners",
   "main": "polishMobileValidator.js",
+  "browser": "polishMobileValidatorBrowser.js",
   "scripts": {
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "demo": "echo 'Open demo.html in your browser to see the real-time validation demo'"
   },
   "keywords": [
     "poland",
@@ -13,11 +15,20 @@
     "phone",
     "validator",
     "operator",
-    "prefix"
+    "prefix",
+    "ajax",
+    "real-time",
+    "event-listener",
+    "browser"
   ],
   "author": "Hayk",
   "license": "MIT",
   "devDependencies": {
     "jest": "^29.7.0"
-  }
+  },
+  "files": [
+    "polishMobileValidator.js",
+    "polishMobileValidatorBrowser.js",
+    "demo.html"
+  ]
 }

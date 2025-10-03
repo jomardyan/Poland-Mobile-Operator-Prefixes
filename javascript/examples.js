@@ -112,6 +112,26 @@ detailedTest.forEach(number => {
     }
 });
 
-console.log('\n' + '='.repeat(70));
+// Example 7: Browser Usage Information
+console.log('\n\n' + '='.repeat(70));
+console.log('EXAMPLE 7: Browser Usage with Ajax and Event Listeners');
+console.log('-'.repeat(70));
+console.log('\nFor real-time validation in the browser, use PolishMobileValidatorBrowser:');
+console.log('\n  1. Include the browser script in your HTML:');
+console.log('     <script src="polishMobileValidatorBrowser.js"></script>');
+console.log('\n  2. Initialize the validator:');
+console.log('     const validator = new PolishMobileValidatorBrowser({');
+console.log('       debounceDelay: 300,');
+console.log('       realTimeValidation: true');
+console.log('     });');
+console.log('\n  3. Attach to input elements:');
+console.log('     validator.attachToInput("#phoneInput", {');
+console.log('       displayElement: "#result",');
+console.log('       formatOnBlur: true');
+console.log('     });');
+console.log('\n  4. Open demo.html in your browser to see it in action!');
+
+console.log('\n\n' + '='.repeat(70));
 console.log('Examples completed!');
 console.log('='.repeat(70));
+console.log('\n💡 TIP: Run "npm run demo" for browser demo instructions');

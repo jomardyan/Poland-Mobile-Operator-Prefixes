@@ -60,6 +60,15 @@ This repository provides comprehensive libraries in both JavaScript and Python f
 - ✅ **Full Test Coverage** - 97%+ code coverage with comprehensive unit tests
 - ✅ **Zero Dependencies** - Core functionality requires no external packages
 
+### NEW: Browser Features (v2.0)
+
+- 🌐 **Real-time Validation** - Live validation as user types with debouncing
+- 🎯 **Event Listeners** - Automatic attachment to input elements
+- 🔄 **Ajax Support** - Asynchronous validation with API endpoints
+- ⚡ **Auto-formatting** - Automatic number formatting on blur
+- 🎨 **UI Integration** - Built-in CSS class management for validation states
+- 🔌 **Easy Integration** - Simple API for attaching to any input element
+
 ### Technical Highlights
 
 - 🚀 **High Performance** - Optimized for speed and efficiency
@@ -69,6 +78,7 @@ This repository provides comprehensive libraries in both JavaScript and Python f
 - 🔄 **CI/CD Integrated** - Automated testing on every commit
 - 📊 **Well Documented** - Complete API documentation with examples
 - 🧪 **Comprehensive Testing** - Multiple Node.js and Python versions tested
+- 🖥️ **Browser & Node.js** - Works in both environments
 
 ---
 
@@ -99,6 +109,40 @@ console.log(result);
 // Format phone number
 console.log(validator.formatPhoneNumber('501234567', 'international'));
 // Output: +48 501 234 567
+\`\`\`
+
+### JavaScript (Browser) - NEW in v2.0
+
+\`\`\`html
+<!-- Include the browser validator -->
+<script src="polishMobileValidatorBrowser.js"></script>
+
+<input type="text" id="phoneInput" placeholder="Enter Polish mobile number">
+<div id="result"></div>
+
+<script>
+// Initialize validator with real-time validation
+const validator = new PolishMobileValidatorBrowser({
+    debounceDelay: 300,
+    realTimeValidation: true
+});
+
+// Attach to input element with auto-formatting
+validator.attachToInput('#phoneInput', {
+    displayElement: '#result',
+    formatOnBlur: true,
+    format: 'spaced',
+    onValidate: (result) => {
+        console.log('Validated:', result);
+    }
+});
+
+// Ajax validation
+async function validateAsync() {
+    const result = await validator.validateViaApi('501234567');
+    console.log(result);
+}
+</script>
 \`\`\`
 
 ### Python
@@ -167,9 +211,76 @@ polish-mobile-validator @ file:///path/to/python
 
 ## 💡 Usage Examples
 
+### Browser Real-time Validation (NEW in v2.0)
+
+**HTML Setup:**
+
+\`\`\`html
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input.valid { border-color: green; background-color: #f1f8f4; }
+        input.invalid { border-color: red; background-color: #fef1f0; }
+        .validation-success { color: green; }
+        .validation-error { color: red; }
+    </style>
+</head>
+<body>
+    <input type="text" id="phoneInput" placeholder="Enter mobile number">
+    <div id="result"></div>
+    
+    <script src="polishMobileValidatorBrowser.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+\`\`\`
+
+**JavaScript (app.js):**
+
+\`\`\`javascript
+// Initialize validator
+const validator = new PolishMobileValidatorBrowser({
+    debounceDelay: 300,
+    realTimeValidation: true,
+    showOperatorInfo: true
+});
+
+// Attach real-time validation to input
+validator.attachToInput('#phoneInput', {
+    displayElement: '#result',
+    validClass: 'valid',
+    invalidClass: 'invalid',
+    formatOnBlur: true,
+    format: 'spaced',
+    onValidate: (result, input) => {
+        if (result.success) {
+            console.log(\`Valid: \${result.operator}\${result.isM2M ? ' (M2M)' : ''}\`);
+        }
+    }
+});
+
+// Ajax validation example
+async function checkNumber() {
+    const result = await validator.validateViaApi('501234567');
+    console.log('Ajax result:', result);
+}
+
+// Batch validation example
+async function validateMultiple() {
+    const numbers = ['501234567', '531234567', '211234567'];
+    const results = await validator.batchValidateAsync(numbers);
+    results.forEach(r => console.log(r.phoneNumber, r.operator));
+}
+\`\`\`
+
+**Try the Live Demo:**
+
+Open `javascript/demo.html` in your browser to see all features in action!
+
 ### Basic Validation
 
-**JavaScript:**
+**JavaScript (Node.js):**
 
 \`\`\`javascript
 const validator = new PolishMobileValidator();
@@ -367,6 +478,52 @@ Initialize validator with optional CSV database path.
 | \`formatPhoneNumber(phoneNumber, format)\` | \`string, string\` | \`string\` | Format number (standard/international/spaced) |
 | \`loadPrefixDatabase(csvPath)\` | \`string\` | \`void\` | Load detailed prefix database from CSV |
 
+### JavaScript Browser API (NEW in v2.0)
+
+#### Constructor
+
+**\`new PolishMobileValidatorBrowser(options?)\`**
+
+Initialize browser validator with configuration options.
+
+**Options:**
+
+\`\`\`javascript
+{
+    debounceDelay: 300,              // Delay before validation (ms)
+    realTimeValidation: true,        // Enable real-time validation
+    showOperatorInfo: true,          // Show operator info in messages
+    apiEndpoint: null,               // API endpoint for Ajax validation
+    onValidation: (result, input) => {}, // Global validation callback
+    onError: (error) => {}           // Error callback
+}
+\`\`\`
+
+#### Methods
+
+| Method | Parameters | Returns | Description |
+|--------|-----------|---------|-------------|
+| \`attachToInput(element, options)\` | \`HTMLElement\|string, Object\` | \`Object\` | Attach real-time validation to input |
+| \`detachFromInput(listenerId)\` | \`string\` | \`boolean\` | Remove event listeners from input |
+| \`validateViaApi(phoneNumber)\` | \`string\` | \`Promise<Object>\` | Validate number via Ajax API |
+| \`batchValidateAsync(phoneNumbers)\` | \`Array<string>\` | \`Promise<Array>\` | Batch validate via Ajax |
+| \`loadPrefixDatabaseFromUrl(url)\` | \`string\` | \`Promise<Object>\` | Load CSV database via Ajax |
+| \`destroy()\` | - | \`void\` | Cleanup all event listeners |
+| All methods from base JavaScript API | - | - | Inherited from base validator |
+
+**attachToInput Options:**
+
+\`\`\`javascript
+{
+    displayElement: null,       // Element to show validation message
+    validClass: 'valid',        // CSS class for valid input
+    invalidClass: 'invalid',    // CSS class for invalid input
+    formatOnBlur: false,        // Auto-format number on blur
+    format: 'spaced',          // Format type (standard/international/spaced)
+    onValidate: (result, input) => {} // Validation callback
+}
+\`\`\`
+
 ### Python API
 
 #### Constructor
@@ -535,10 +692,13 @@ Poland-Mobile-Operator-Prefixes/
 │       └── test.yml              # CI/CD pipeline
 ├── javascript/
 │   ├── coverage/                 # Test coverage reports
+│   ├── demo.html                 # Browser demo (NEW)
 │   ├── examples.js               # Usage examples
 │   ├── package.json              # NPM configuration
-│   ├── polishMobileValidator.js  # Main module
-│   └── polishMobileValidator.test.js # Unit tests (Jest)
+│   ├── polishMobileValidator.js  # Main module (Node.js)
+│   ├── polishMobileValidatorBrowser.js  # Browser module with Ajax (NEW)
+│   ├── polishMobileValidator.test.js # Unit tests (Jest)
+│   └── polishMobileValidatorBrowser.test.js # Browser tests (NEW)
 ├── python/
 │   ├── examples.py               # Usage examples
 │   ├── polish_mobile_validator.py # Main module

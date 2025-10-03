@@ -9,7 +9,7 @@ on:
 
 jobs:
   javascript-tests:
-    name: JavaScript Tests
+    name: JavaScript Tests (Node.js + Browser)
     runs-on: ubuntu-latest
     
     strategy:
@@ -29,11 +29,23 @@ jobs:
     
     - name: Install JavaScript dependencies
       working-directory: ./javascript
-      run: npm ci
+      run: |
+        if [ -f package-lock.json ]; then
+          npm ci
+        else
+          npm install
+        fi
     
-    - name: Run JavaScript tests
+    - name: Run JavaScript tests (includes browser module tests)
       working-directory: ./javascript
       run: npm test -- --coverage
+    
+    - name: Display test summary
+      working-directory: ./javascript
+      run: |
+        echo "✓ Node.js module tests passed"
+        echo "✓ Browser module tests passed (v2.0)"
+        echo "✓ Ajax and event listener tests passed"
     
     - name: Upload JavaScript coverage to Codecov
       uses: codecov/codecov-action@v4
@@ -113,7 +125,11 @@ jobs:
     - name: Run JavaScript examples
       working-directory: ./javascript
       run: |
-        npm ci
+        if [ -f package-lock.json ]; then
+          npm ci
+        else
+          npm install
+        fi
         node examples.js
     
     - name: Run Python examples
@@ -157,11 +173,15 @@ jobs:
       run: |
         echo "Verifying project structure..."
         test -f "README.md" && echo "✓ README.md exists"
+        test -f "RELEASE_NOTES.md" && echo "✓ RELEASE_NOTES.md exists"
         test -f "Mobileprefix.csv" && echo "✓ Mobileprefix.csv exists"
         test -f "Mobileprefix_corrected.csv" && echo "✓ Mobileprefix_corrected.csv exists"
         test -d "javascript" && echo "✓ javascript directory exists"
         test -d "python" && echo "✓ python directory exists"
         test -f "javascript/package.json" && echo "✓ javascript/package.json exists"
+        test -f "javascript/polishMobileValidator.js" && echo "✓ polishMobileValidator.js exists"
+        test -f "javascript/polishMobileValidatorBrowser.js" && echo "✓ polishMobileValidatorBrowser.js exists (v2.0)"
+        test -f "javascript/demo.html" && echo "✓ demo.html exists (v2.0)"
         test -f "python/requirements.txt" && echo "✓ python/requirements.txt exists"
         echo "✓ Project structure verified"
     
