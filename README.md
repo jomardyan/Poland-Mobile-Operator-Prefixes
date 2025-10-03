@@ -30,846 +30,543 @@ This repository provides comprehensive libraries in both JavaScript and Python f
 
 ---
 
-## 📋 Table of Contents- [Features](#-features)
+## 📋 Table of Contents
+
+- [Features](#-features)
 - [Quick Start](#-quick-start)
 - [Installation](#-installation)
 - [Usage Examples](#-usage-examples)
 - [API Documentation](#-api-documentation)
-- [Operators & Prefixes](#-operators--prefixes)
+- [Operators and Prefixes](#-operators-and-prefixes)
 - [Testing](#-testing)
 - [CI/CD](#-cicd)
 - [Project Structure](#-project-structure)
 - [Contributing](#-contributing)
 - [License](#-license)
 
-
-
----In Poland, cellular numbering consists of 9 digits. The numbering of mobile networks in Poland has network identifiers (the first two digits): 21, 45, 50, 51, 53, 57, 60, 66, 69, 72, 73, 78, 79, 88, where the numbering "21" is intended for Machine to Machine (M2M) connections.
-
-
-
-## 📋 Table of ContentsThe numbering **"21"** is reserved for **Machine to Machine (M2M)** connections, used for devices that do not require human interaction (alarm systems, smart meters, industrial control systems, etc.).
-
-
-
-- [Features](#-features)**Operators and their assigned numbering ranges:**
-
-- [Quick Start](#-quick-start)
-
-- [Installation](#-installation)*Last updated: January 24, 2022*
-
-- [Usage Examples](#-usage-examples)
-
-- [API Documentation](#-api-documentation) - **Play**: 50, 51, 53, 60, 72, 73, 78, 79
-
-- [Operators & Prefixes](#-operators--prefixes)
-
-- [Testing](#-testing)--- - **Orange**: 57, 66, 69
-
-- [CI/CD](#-cicd)
-
-- [Contributing](#-contributing) - **T-Mobile**: 45, 88
-
-- [License](#-license)
-
-## Operators and Prefixes - **Plus**: 21
-
 ---
-
-
 
 ## ✨ Features
 
-| Operator | Market Share | Prefixes |**Details:**
-
 ### Core Capabilities
 
-|----------|-------------|----------|
-
 - ✅ **Phone Number Validation** - Validate Polish mobile numbers (9 digits)
-
-- ✅ **Operator Recognition** - Identify mobile operator from prefix| **Play** | >30% | 53, 60, 72, 73, 78, 79 |-   **Play:** The largest mobile operator in Poland, with a market share of over 30%.
-
-- ✅ **M2M Detection** - Detect Machine-to-Machine connections
-
-- ✅ **Number Normalization** - Clean and standardize phone numbers| **Orange** | >25% | 50, 51, 57, 66, 69 |-   **Orange:** The second largest mobile operator in Poland, with a market share of over 25%.
-
+- ✅ **Operator Recognition** - Identify mobile operator from prefix
+- ✅ **M2M Detection** - Detect Machine-to-Machine connections (prefixes 21, 69)
+- ✅ **Number Normalization** - Clean and standardize phone numbers
 - ✅ **Multiple Format Support** - Format numbers in standard, international, or spaced formats
-
-- ✅ **Batch Processing** - Validate multiple numbers efficiently| **T-Mobile** | >20% | 45, 88 |-   **T-Mobile:** The third largest mobile operator in Poland, with a market share of over 20%.
-
+- ✅ **Batch Processing** - Validate multiple numbers efficiently
 - ✅ **CSV Database** - Detailed prefix-to-operator mapping from official sources
-
-- ✅ **Full Test Coverage** - 97%+ code coverage with comprehensive unit tests| **Plus** | >20% | 21 (M2M) |-   **Plus:** The fourth largest mobile operator in Poland, with a market share of over 20%.
-
-- ✅ **TypeScript Ready** - Type definitions included
-
+- ✅ **Full Test Coverage** - 97%+ code coverage with comprehensive unit tests
 - ✅ **Zero Dependencies** - Core functionality requires no external packages
 
+### Technical Highlights
 
-
-### Technical Highlights### Operator Details**Notes**:
-
-
-
-- 🚀 **High Performance** - Optimized for speed and efficiencyThe numbering "21" is reserved for Machine to Machine (M2M) connections, which are used for devices that do not require human interaction, such as alarm systems, smart meters, and industrial control systems.
-
+- 🚀 **High Performance** - Optimized for speed and efficiency
 - 🔒 **Production Ready** - Battle-tested and reliable
-
-- 📦 **Modular Design** - Easy to integrate into existing projects- **Play**: The largest mobile operator in PolandThe numbering ranges may change in the future.
-
+- 📦 **Modular Design** - Easy to integrate into existing projects
 - 🌍 **International Support** - Handles multiple number formats
-
-- 🔄 **CI/CD Integrated** - Automated testing on every commit- **Orange**: The second largest mobile operator in Poland
-
-- 📊 **Well Documented** - Complete API documentation with examples- **T-Mobile**: The third largest mobile operator in Poland
-
-- **Plus**: The fourth largest mobile operator in Poland
-
----
+- 🔄 **CI/CD Integrated** - Automated testing on every commit
+- 📊 **Well Documented** - Complete API documentation with examples
+- 🧪 **Comprehensive Testing** - Multiple Node.js and Python versions tested
 
 ---
 
 ## 🚀 Quick Start
 
-## Features
-
 ### JavaScript
 
-Both JavaScript and Python implementations provide:
+\`\`\`javascript
+const PolishMobileValidator = require('./polishMobileValidator');
 
-```javascript
+// Initialize validator
+const validator = new PolishMobileValidator();
 
-const PolishMobileValidator = require('./polishMobileValidator');✅ **Phone Number Validation** - Validate Polish mobile numbers (9 digits)  
-
-✅ **Operator Recognition** - Identify the mobile operator from the prefix  
-
-const validator = new PolishMobileValidator();✅ **M2M Detection** - Detect Machine-to-Machine connections  
-
-✅ **Number Normalization** - Clean and standardize phone numbers  
-
-// Validate and recognize operator✅ **Number Formatting** - Format numbers in multiple styles (standard, international, spaced)  
-
-const result = validator.recognizeOperator('501234567');✅ **Batch Processing** - Validate multiple numbers at once  
-
-console.log(result);✅ **CSV Database Support** - Load detailed prefix data from CSV  
-
-// {✅ **Full Test Coverage** - Comprehensive unit tests included
-
+// Validate and recognize operator
+const result = validator.recognizeOperator('501234567');
+console.log(result);
+// {
 //   success: true,
-
-//   operator: 'Orange',---
-
+//   phoneNumber: '501234567',
 //   normalized: '501234567',
-
-//   prefix: '50',## Installation & Usage
-
-//   isM2M: false
-
-// }### JavaScript
-
-
-
-// Format phone number#### Installation
-
-console.log(validator.formatPhoneNumber('501234567', 'international'));
-
-// Output: +48 501 234 567```bash
-
-```cd javascript
-
-npm install
-
-### Python```
-
-
-
-```python#### Basic Usage
-
-from polish_mobile_validator import PolishMobileValidator
-
-```javascript
-
-validator = PolishMobileValidator()const PolishMobileValidator = require('./polishMobileValidator');
-
-
-
-# Validate and recognize operator// Initialize validator
-
-result = validator.recognize_operator('501234567')const validator = new PolishMobileValidator();
-
-print(result)
-
-# {// Or with CSV database
-
-#   'success': True,const validatorWithDB = new PolishMobileValidator('../Mobileprefix.csv');
-
-#   'operator': 'Orange',
-
-#   'normalized': '501234567',// Validate a phone number
-
-#   'prefix': '50',const result = validator.recognizeOperator('501234567');
-
-#   'is_m2m': Falseconsole.log(result);
-
-# }// {
-
-//   success: true,
-
-# Format phone number//   phoneNumber: '501234567',
-
-print(validator.format_phone_number('501234567', 'international'))//   normalized: '501234567',
-
-# Output: +48 501 234 567//   prefix: '50',
-
-```//   operator: 'Orange',
-
+//   prefix: '50',
+//   operator: 'Orange',
 //   detailedOperator: null,
-
----//   isM2M: false,
-
+//   isM2M: false,
 //   message: 'Operator: Orange'
+// }
 
-## 📦 Installation// }
-
-
-
-### JavaScript// Format phone number
-
+// Format phone number
 console.log(validator.formatPhoneNumber('501234567', 'international'));
-
-```bash// Output: +48 501 234 567
-
-cd javascript
-
-npm install// Check if M2M
-
-```console.log(validator.isM2MNumber('211234567')); // true
-
-
-
-**Package.json Integration:**// Batch validate
-
-const numbers = ['501234567', '721234567', '881234567'];
-
-```jsonconst results = validator.batchValidate(numbers);
-
-{```
-
-  "dependencies": {
-
-    "polish-mobile-validator": "file:./path/to/javascript"#### Run Tests
-
-  }
-
-}```bash
-
-```cd javascript
-
-npm test
-
-### Python```
-
-
-
-```bash#### API Reference (JavaScript)
-
-cd python
-
-pip install -r requirements.txt**Methods:**
-
-```
-
-- `normalizePhoneNumber(phoneNumber)` - Normalize phone number to 9 digits
-
-**Requirements.txt:**- `validatePhoneNumber(phoneNumber)` - Validate phone number structure
-
-- `recognizeOperator(phoneNumber)` - Get complete operator information
-
-```txt- `getOperatorByPrefix(prefix)` - Get operator name by 2-digit prefix
-
-# Add to your requirements.txt- `isM2MNumber(phoneNumber)` - Check if number is M2M
-
-polish-mobile-validator @ file:///path/to/python- `getValidPrefixes()` - Get list of all valid prefixes
-
-```- `getOperatorPrefixes()` - Get mapping of operators to prefixes
-
-- `batchValidate(phoneNumbers)` - Validate multiple numbers
-
----- `formatPhoneNumber(phoneNumber, format)` - Format number (standard/international/spaced)
-
-- `loadPrefixDatabase(csvPath)` - Load detailed prefix database from CSV
-
-## 💡 Usage Examples
-
----
-
-### Validate Multiple Numbers
+// Output: +48 501 234 567
+\`\`\`
 
 ### Python
 
+\`\`\`python
+from polish_mobile_validator import PolishMobileValidator
+
+# Initialize validator
+validator = PolishMobileValidator()
+
+# Validate and recognize operator
+result = validator.recognize_operator('501234567')
+print(result)
+# {
+#   'success': True,
+#   'phone_number': '501234567',
+#   'normalized': '501234567',
+#   'prefix': '50',
+#   'operator': 'Orange',
+#   'detailed_operator': None,
+#   'is_m2m': False,
+#   'message': 'Operator: Orange'
+# }
+
+# Format phone number
+print(validator.format_phone_number('501234567', 'international'))
+# Output: +48 501 234 567
+\`\`\`
+
+---
+
+## 📦 Installation
+
+### JavaScript
+
+\`\`\`bash
+cd javascript
+npm install
+\`\`\`
+
+**Package.json Integration:**
+
+\`\`\`json
+{
+  "dependencies": {
+    "polish-mobile-validator": "file:./path/to/javascript"
+  }
+}
+\`\`\`
+
+### Python
+
+\`\`\`bash
+cd python
+pip install -r requirements.txt
+\`\`\`
+
+**Requirements.txt:**
+
+\`\`\`txt
+# Add to your requirements.txt
+polish-mobile-validator @ file:///path/to/python
+\`\`\`
+
+---
+
+## 💡 Usage Examples
+
+### Basic Validation
+
 **JavaScript:**
 
-#### Installation
+\`\`\`javascript
+const validator = new PolishMobileValidator();
 
-```javascript
+// Valid Orange number
+validator.recognizeOperator('501234567');
+// { success: true, operator: 'Orange', isM2M: false }
 
-const validator = new PolishMobileValidator();```bash
+// Valid Play number
+validator.recognizeOperator('721234567');
+// { success: true, operator: 'Play', isM2M: false }
 
-cd python
+// M2M number (Plus)
+validator.recognizeOperator('211234567');
+// { success: true, operator: 'Plus', isM2M: true }
 
-const numbers = ['501234567', '721234567', '881234567', '211234567'];pip install -r requirements.txt
-
-const results = validator.batchValidate(numbers);```
-
-
-
-results.forEach(r => {#### Basic Usage
-
-  console.log(`${r.phoneNumber}: ${r.operator} ${r.isM2M ? '(M2M)' : ''}`);
-
-});```python
-
-// Output:from polish_mobile_validator import PolishMobileValidator
-
-// 501234567: Orange 
-
-// 721234567: Play # Initialize validator
-
-// 881234567: T-Mobile validator = PolishMobileValidator()
-
-// 211234567: Plus (M2M)
-
-```# Or with CSV database
-
-validator_with_db = PolishMobileValidator('../Mobileprefix.csv')
+// Invalid number
+validator.recognizeOperator('991234567');
+// { success: false, message: 'Invalid prefix: 99...' }
+\`\`\`
 
 **Python:**
 
-# Validate a phone number
+\`\`\`python
+validator = PolishMobileValidator()
 
-```pythonresult = validator.recognize_operator('501234567')
+# Valid Orange number
+validator.recognize_operator('501234567')
+# {'success': True, 'operator': 'Orange', 'is_m2m': False}
 
-validator = PolishMobileValidator()print(result)
+# Valid Play number
+validator.recognize_operator('721234567')
+# {'success': True, 'operator': 'Play', 'is_m2m': False}
 
-# {
+# M2M number (Plus)
+validator.recognize_operator('211234567')
+# {'success': True, 'operator': 'Plus', 'is_m2m': True}
 
-numbers = ['501234567', '721234567', '881234567', '211234567']#   'success': True,
+# Invalid number
+validator.recognize_operator('991234567')
+# {'success': False, 'message': 'Invalid prefix: 99...'}
+\`\`\`
 
-results = validator.batch_validate(numbers)#   'phone_number': '501234567',
+### Format Phone Numbers
 
-#   'normalized': '501234567',
+**JavaScript:**
 
-for r in results:#   'prefix': '50',
+\`\`\`javascript
+const validator = new PolishMobileValidator();
+const number = '501234567';
 
-    m2m = '(M2M)' if r['is_m2m'] else ''#   'operator': 'Orange',
+validator.formatPhoneNumber(number, 'standard');      // '501234567'
+validator.formatPhoneNumber(number, 'international'); // '+48 501 234 567'
+validator.formatPhoneNumber(number, 'spaced');        // '501 234 567'
+\`\`\`
 
-    print(f"{r['phone_number']}: {r['operator']} {m2m}")#   'detailed_operator': None,
+**Python:**
 
-```#   'is_m2m': False,
+\`\`\`python
+validator = PolishMobileValidator()
+number = '501234567'
 
-#   'message': 'Operator: Orange'
+validator.format_phone_number(number, 'standard')       # '501234567'
+validator.format_phone_number(number, 'international')  # '+48 501 234 567'
+validator.format_phone_number(number, 'spaced')         # '501 234 567'
+\`\`\`
 
-### Load Detailed Database# }
+### Batch Processing
 
+**JavaScript:**
 
+\`\`\`javascript
+const validator = new PolishMobileValidator();
+const numbers = [
+    '501234567',  // Orange
+    '721234567',  // Play
+    '881234567',  // T-Mobile
+    '211234567',  // Plus (M2M)
+    '991234567'   // Invalid
+];
 
-**JavaScript:**# Format phone number
+const results = validator.batchValidate(numbers);
+results.forEach(result => {
+    const m2m = result.isM2M ? '(M2M)' : '';
+    const status = result.success ? result.operator : 'Invalid';
+    console.log(\`\${result.phoneNumber}: \${status} \${m2m}\`);
+});
+// Output:
+// 501234567: Orange 
+// 721234567: Play 
+// 881234567: T-Mobile 
+// 211234567: Plus (M2M)
+// 991234567: Invalid
+\`\`\`
 
-print(validator.format_phone_number('501234567', 'international'))
+**Python:**
 
-```javascript# Output: +48 501 234 567
+\`\`\`python
+validator = PolishMobileValidator()
+numbers = [
+    '501234567',  # Orange
+    '721234567',  # Play
+    '881234567',  # T-Mobile
+    '211234567',  # Plus (M2M)
+    '991234567'   # Invalid
+]
 
+results = validator.batch_validate(numbers)
+for result in results:
+    m2m = '(M2M)' if result['is_m2m'] else ''
+    status = result['operator'] if result['success'] else 'Invalid'
+    print(f"{result['phone_number']}: {status} {m2m}")
+# Output:
+# 501234567: Orange 
+# 721234567: Play 
+# 881234567: T-Mobile 
+# 211234567: Plus (M2M)
+# 991234567: Invalid
+\`\`\`
+
+### Load Detailed Database
+
+**JavaScript:**
+
+\`\`\`javascript
 const path = require('path');
-
-const validator = new PolishMobileValidator(# Check if M2M
-
-  path.join(__dirname, 'Mobileprefix_corrected.csv')print(validator.is_m2m_number('211234567'))  # True
-
+const validator = new PolishMobileValidator(
+  path.join(__dirname, 'Mobileprefix_corrected.csv')
 );
 
-# Batch validate
-
-const result = validator.recognizeOperator('500123456');numbers = ['501234567', '721234567', '881234567']
-
-console.log(result.detailedOperator);results = validator.batch_validate(numbers)
-
-// Output: Orange Polska S.A. (Sieć komórkowa Orange)```
-
-```
-
-#### Run Tests
+const result = validator.recognizeOperator('500123456');
+console.log(result.detailedOperator);
+// Output: Orange Polska S.A. (Sieć komórkowa Orange)
+\`\`\`
 
 **Python:**
 
-```bash
-
-```pythoncd python
-
-import ospython test_polish_mobile_validator.py
-
+\`\`\`python
+import os
 validator = PolishMobileValidator(
-
-  os.path.join(os.path.dirname(__file__), 'Mobileprefix_corrected.csv')# Or with pytest
-
-)pytest test_polish_mobile_validator.py -v
-
-```
+  os.path.join(os.path.dirname(__file__), 'Mobileprefix_corrected.csv')
+)
 
 result = validator.recognize_operator('500123456')
-
-print(result['detailed_operator'])#### Run Example
-
+print(result['detailed_operator'])
 # Output: Orange Polska S.A. (Sieć komórkowa Orange)
+\`\`\`
 
-``````bash
-
-cd python
-
-### Detect M2M Numberspython polish_mobile_validator.py
-
-```
+### Check M2M Numbers
 
 **JavaScript:**
 
-#### API Reference (Python)
+\`\`\`javascript
+const validator = new PolishMobileValidator();
 
-```javascript
-
-const validator = new PolishMobileValidator();**Methods:**
-
-
-
-console.log(validator.isM2MNumber('211234567')); // true- `normalize_phone_number(phone_number)` - Normalize phone number to 9 digits
-
-console.log(validator.isM2MNumber('501234567')); // false- `validate_phone_number(phone_number)` - Validate phone number structure
-
-```- `recognize_operator(phone_number)` - Get complete operator information
-
-- `get_operator_by_prefix(prefix)` - Get operator name by 2-digit prefix
-
-**Python:**- `is_m2m_number(phone_number)` - Check if number is M2M
-
-- `get_valid_prefixes()` - Get list of all valid prefixes
-
-```python- `get_operator_prefixes()` - Get mapping of operators to prefixes
-
-validator = PolishMobileValidator()- `batch_validate(phone_numbers)` - Validate multiple numbers
-
-- `format_phone_number(phone_number, format_type)` - Format number (standard/international/spaced)
-
-print(validator.is_m2m_number('211234567'))  # True- `load_prefix_database(csv_path)` - Load detailed prefix database from CSV
-
-print(validator.is_m2m_number('501234567'))  # False
-
-```---
-
-
-
----## Examples
-
-
-
-## 📚 API Documentation### Validate and Recognize Operator
-
-
-
-### JavaScript API**JavaScript:**
-
-```javascript
-
-#### `new PolishMobileValidator(csvPath?)`const validator = new PolishMobileValidator();
-
-
-
-Initialize validator with optional CSV database path.// Valid Orange number
-
-validator.recognizeOperator('501234567');
-
-#### Methods// { success: true, operator: 'Orange', isM2M: false }
-
-
-
-| Method | Parameters | Returns | Description |// Valid Play number
-
-|--------|-----------|---------|-------------|validator.recognizeOperator('721234567');
-
-| `normalizePhoneNumber(phoneNumber)` | `string` | `string` | Normalize phone number to 9 digits |// { success: true, operator: 'Play', isM2M: false }
-
-| `validatePhoneNumber(phoneNumber)` | `string` | `Object` | Validate phone number structure |
-
-| `recognizeOperator(phoneNumber)` | `string` | `Object` | Get complete operator information |// M2M number
-
-| `getOperatorByPrefix(prefix)` | `string` | `string` | Get operator name by 2-digit prefix |validator.recognizeOperator('211234567');
-
-| `isM2MNumber(phoneNumber)` | `string` | `boolean` | Check if number is M2M |// { success: true, operator: 'Plus', isM2M: true }
-
-| `getValidPrefixes()` | - | `Array<string>` | Get list of all valid prefixes |
-
-| `getOperatorPrefixes()` | - | `Object` | Get mapping of operators to prefixes |// Invalid number
-
-| `batchValidate(phoneNumbers)` | `Array<string>` | `Array<Object>` | Validate multiple numbers |validator.recognizeOperator('991234567');
-
-| `formatPhoneNumber(phoneNumber, format)` | `string, string` | `string` | Format number (standard/international/spaced) |// { success: false, message: 'Invalid prefix: 99...' }
-
-```
-
-### Python API
+console.log(validator.isM2MNumber('211234567')); // true (Plus M2M)
+console.log(validator.isM2MNumber('691234567')); // true (Plus M2M)
+console.log(validator.isM2MNumber('501234567')); // false (Orange - regular)
+\`\`\`
 
 **Python:**
 
-#### `PolishMobileValidator(csv_path=None)````python
-
+\`\`\`python
 validator = PolishMobileValidator()
+
+print(validator.is_m2m_number('211234567'))  # True (Plus M2M)
+print(validator.is_m2m_number('691234567'))  # True (Plus M2M)
+print(validator.is_m2m_number('501234567'))  # False (Orange - regular)
+\`\`\`
+
+---
+
+## �� API Documentation
+
+### JavaScript API
+
+#### Constructor
+
+**\`new PolishMobileValidator(csvPath?)\`**
 
 Initialize validator with optional CSV database path.
 
-# Valid Orange number
-
-#### Methodsvalidator.recognize_operator('501234567')
-
-# {'success': True, 'operator': 'Orange', 'is_m2m': False}
+#### Methods
 
 | Method | Parameters | Returns | Description |
+|--------|-----------|---------|-------------|
+| \`normalizePhoneNumber(phoneNumber)\` | \`string\` | \`string\` | Normalize phone number to 9 digits |
+| \`validatePhoneNumber(phoneNumber)\` | \`string\` | \`Object\` | Validate phone number structure |
+| \`recognizeOperator(phoneNumber)\` | \`string\` | \`Object\` | Get complete operator information |
+| \`getOperatorByPrefix(prefix)\` | \`string\` | \`string\` | Get operator name by 2-digit prefix |
+| \`isM2MNumber(phoneNumber)\` | \`string\` | \`boolean\` | Check if number is M2M |
+| \`getValidPrefixes()\` | - | \`Array<string>\` | Get list of all valid prefixes |
+| \`getOperatorPrefixes()\` | - | \`Object\` | Get mapping of operators to prefixes |
+| \`batchValidate(phoneNumbers)\` | \`Array<string>\` | \`Array<Object>\` | Validate multiple numbers |
+| \`formatPhoneNumber(phoneNumber, format)\` | \`string, string\` | \`string\` | Format number (standard/international/spaced) |
+| \`loadPrefixDatabase(csvPath)\` | \`string\` | \`void\` | Load detailed prefix database from CSV |
 
-|--------|-----------|---------|-------------|# Valid Play number
+### Python API
 
-| `normalize_phone_number(phone_number)` | `str` | `str` | Normalize phone number to 9 digits |validator.recognize_operator('721234567')
+#### Constructor
 
-| `validate_phone_number(phone_number)` | `str` | `dict` | Validate phone number structure |# {'success': True, 'operator': 'Play', 'is_m2m': False}
+**\`PolishMobileValidator(csv_path=None)\`**
 
-| `recognize_operator(phone_number)` | `str` | `dict` | Get complete operator information |
+Initialize validator with optional CSV database path.
 
-| `get_operator_by_prefix(prefix)` | `str` | `str` | Get operator name by 2-digit prefix |# M2M number
+#### Methods
 
-| `is_m2m_number(phone_number)` | `str` | `bool` | Check if number is M2M |validator.recognize_operator('211234567')
+| Method | Parameters | Returns | Description |
+|--------|-----------|---------|-------------|
+| \`normalize_phone_number(phone_number)\` | \`str\` | \`str\` | Normalize phone number to 9 digits |
+| \`validate_phone_number(phone_number)\` | \`str\` | \`dict\` | Validate phone number structure |
+| \`recognize_operator(phone_number)\` | \`str\` | \`dict\` | Get complete operator information |
+| \`get_operator_by_prefix(prefix)\` | \`str\` | \`str\` | Get operator name by 2-digit prefix |
+| \`is_m2m_number(phone_number)\` | \`str\` | \`bool\` | Check if number is M2M |
+| \`get_valid_prefixes()\` | - | \`List[str]\` | Get list of all valid prefixes |
+| \`get_operator_prefixes()\` | - | \`dict\` | Get mapping of operators to prefixes |
+| \`batch_validate(phone_numbers)\` | \`List[str]\` | \`List[dict]\` | Validate multiple numbers |
+| \`format_phone_number(phone_number, format_type)\` | \`str, str\` | \`str\` | Format number (standard/international/spaced) |
+| \`load_prefix_database(csv_path)\` | \`str\` | \`None\` | Load detailed prefix database from CSV |
 
-| `get_valid_prefixes()` | - | `List[str]` | Get list of all valid prefixes |# {'success': True, 'operator': 'Plus', 'is_m2m': True}
+---
 
-| `get_operator_prefixes()` | - | `dict` | Get mapping of operators to prefixes |
+## 📊 Operators and Prefixes
 
-| `batch_validate(phone_numbers)` | `List[str]` | `List[dict]` | Validate multiple numbers |# Invalid number
+Polish mobile numbering consists of **9 digits**. The network identifiers (first two digits) are:
 
-| `format_phone_number(phone_number, format_type)` | `str, str` | `str` | Format number (standard/international/spaced) |validator.recognize_operator('991234567')
-
-# {'success': False, 'message': 'Invalid prefix: 99...'}
-
----```
-
-
-
-## 📊 Operators & Prefixes### Format Phone Numbers
-
-
-
-Polish mobile numbering consists of **9 digits**. The network identifiers (first two digits) are:**JavaScript:**
-
-```javascript
-
-**21, 45, 50, 51, 53, 57, 60, 66, 69, 72, 73, 78, 79, 88**const validator = new PolishMobileValidator();
-
-const number = '501234567';
+**21, 45, 50, 51, 53, 57, 60, 66, 69, 72, 73, 78, 79, 88**
 
 ### Operator Distribution
 
-validator.formatPhoneNumber(number, 'standard');      // '501234567'
+| Operator | Market Share | Prefixes | Type |
+|----------|-------------|----------|------|
+| **Play** | >30% | 53, 79 | Consumer |
+| **Orange** | >25% | 50, 51, 57, 78 | Consumer |
+| **T-Mobile** | >20% | 45, 60, 66, 72, 73, 88 | Consumer |
+| **Plus** | >20% | 21, 69 | M2M & Consumer |
 
-| Operator | Market Share | Prefixes | Type |validator.formatPhoneNumber(number, 'international'); // '+48 501 234 567'
+### Special Note: M2M Numbers
 
-|----------|-------------|----------|------|validator.formatPhoneNumber(number, 'spaced');        // '501 234 567'
+The prefixes **21** and **69** are reserved for **Machine-to-Machine (M2M)** connections:
+- IoT devices and sensors
+- Alarm and security systems
+- Smart meters and utilities
+- Industrial control systems
+- Automated monitoring systems
+- Vehicle tracking systems
+- Remote telemetry devices
 
-| **Play** | >30% | 53, 60, 72, 73, 78, 79 | Consumer |```
+*Last database update: January 24, 2022*
 
-| **Orange** | >25% | 50, 51, 57, 66, 69 | Consumer |
+---
 
-| **T-Mobile** | >20% | 45, 88 | Consumer |**Python:**
+## 🧪 Testing
 
-| **Plus** | >20% | 21 | M2M Only |```python
+### JavaScript Tests
 
-validator = PolishMobileValidator()
-
-### Special Note: M2M Numbersnumber = '501234567'
-
-
-
-The prefix **21** is reserved for **Machine-to-Machine (M2M)** connections:validator.format_phone_number(number, 'standard')       # '501234567'
-
-- Alarm systemsvalidator.format_phone_number(number, 'international')  # '+48 501 234 567'
-
-- Smart metersvalidator.format_phone_number(number, 'spaced')         # '501 234 567'
-
-- Industrial control systems```
-
-- IoT devices
-
-- Automated monitoring systems### Batch Processing
-
-
-
-*Last database update: January 24, 2022***JavaScript:**
-
-```javascript
-
----const validator = new PolishMobileValidator();
-
-const numbers = [
-
-## 🧪 Testing    '501234567',  // Orange
-
-    '721234567',  // Play
-
-### JavaScript Tests    '881234567',  // T-Mobile
-
-    '991234567'   // Invalid
-
-```bash];
-
+\`\`\`bash
 cd javascript
+npm test
+\`\`\`
 
-npm testconst results = validator.batchValidate(numbers);
-
-```results.forEach(result => {
-
-    console.log(`${result.phoneNumber}: ${result.success ? result.operator : 'Invalid'}`);
-
-**Test Coverage:**});
-
-- ✅ 38 test cases```
-
+**Test Coverage:**
+- ✅ 38 test cases
 - ✅ 97.14% statement coverage
+- ✅ 90.47% branch coverage
+- ✅ 100% function coverage
 
-- ✅ 90.47% branch coverage**Python:**
-
-- ✅ 100% function coverage```python
-
-validator = PolishMobileValidator()
-
-**Test Categories:**numbers = [
-
-- Phone number normalization (6 tests)    '501234567',  # Orange
-
-- Phone number validation (7 tests)    '721234567',  # Play
-
-- Operator recognition (6 tests)    '881234567',  # T-Mobile
-
-- M2M detection (3 tests)    '991234567'   # Invalid
-
-- Prefix operations (4 tests)]
-
+**Test Categories:**
+- Phone number normalization (6 tests)
+- Phone number validation (7 tests)
+- Operator recognition (6 tests)
+- M2M detection (3 tests)
+- Prefix operations (4 tests)
 - Batch validation (2 tests)
+- Phone number formatting (5 tests)
+- Edge cases (3 tests)
+- CSV database loading (2 tests)
 
-- Phone number formatting (5 tests)results = validator.batch_validate(numbers)
+### Python Tests
 
-- Edge cases (3 tests)for result in results:
-
-- CSV database loading (2 tests)    status = result['operator'] if result['success'] else 'Invalid'
-
-    print(f"{result['phone_number']}: {status}")
-
-### Python Tests```
-
-
-
-```bash---
-
+\`\`\`bash
 cd python
+python test_polish_mobile_validator.py
 
-python test_polish_mobile_validator.py## Testing
-
-
-
-# Or with pytestBoth implementations include comprehensive unit tests:
-
+# Or with pytest
 pytest test_polish_mobile_validator.py -v --cov
+\`\`\`
 
-```### JavaScript Tests (38 tests)
+**Test Coverage:**
+- ✅ 46 test cases
+- ✅ All tests passing
+- ✅ Comprehensive edge case coverage
 
-- ✅ Phone number normalization
+### Run Examples
 
-**Test Coverage:**- ✅ Phone number validation
+**JavaScript:**
 
-- ✅ 46 test cases- ✅ Operator recognition
-
-- ✅ All tests passing- ✅ M2M detection
-
-- ✅ Comprehensive edge case coverage- ✅ Prefix operations
-
-- ✅ Batch validation
-
-### Run Examples- ✅ Phone number formatting
-
-- ✅ Edge cases
-
-**JavaScript:**- ✅ CSV database loading
-
-```bash
-
-cd javascript**Coverage: 97.14% statements, 90.47% branches**
-
+\`\`\`bash
+cd javascript
+npm ci
 node examples.js
+\`\`\`
 
-```### Python Tests (46 tests)
+**Python:**
 
-- ✅ Phone number normalization
+\`\`\`bash
+cd python
+pip install -r requirements.txt
+python examples.py
+\`\`\`
 
-**Python:**- ✅ Phone number validation
-
-```bash- ✅ Operator recognition
-
-cd python- ✅ M2M detection
-
-python examples.py- ✅ Prefix operations
-
-```- ✅ Batch validation
-
-- ✅ Phone number formatting
-
----- ✅ Edge cases
-
-- ✅ CSV database loading
+---
 
 ## 🔄 CI/CD
 
----
-
 This project uses **GitHub Actions** for continuous integration and deployment.
-
-## Project Structure
 
 ### Workflows
 
-```
+#### Test App Functionalities (.github/workflows/test.yml)
 
-#### 1. CI Pipeline (`.github/workflows/ci.yml`)Poland-Mobile-Operator-Prefixes/
+Our comprehensive CI/CD pipeline includes:
 
-- Runs on every push and pull request├── README.md                       # This file
+1. **JavaScript Tests**
+   - Tests on Node.js 16.x, 18.x, 20.x
+   - Runs test suite with coverage
+   - Uploads coverage reports to Codecov
 
-- Validates project structure├── Mobileprefix.csv               # Detailed prefix database
+2. **Python Tests**
+   - Tests on Python 3.8, 3.9, 3.10, 3.11, 3.12
+   - Runs unittest and pytest with coverage
+   - Uploads coverage reports to Codecov
 
-- Checks for duplicate prefixes in CSV├── javascript/
+3. **Integration Tests**
+   - Verifies CSV files exist and are valid
+   - Runs JavaScript and Python examples
+   - Checks CSV data integrity
+   - Cross-platform validation
 
-- Triggers JavaScript and Python test suites│   ├── package.json               # Node.js dependencies
+4. **Code Quality Checks**
+   - Checks for duplicate prefixes in CSV
+   - Verifies project structure
+   - Validates file encodings
+   - Ensures data consistency
 
-│   ├── polishMobileValidator.js   # Main validator module
-
-#### 2. JavaScript Tests (`.github/workflows/javascript-tests.yml`)│   └── polishMobileValidator.test.js # Unit tests (Jest)
-
-- Tests on Node.js 16.x, 18.x, 20.x└── python/
-
-- Runs test suite with coverage    ├── requirements.txt           # Python dependencies
-
-- Uploads coverage reports to Codecov    ├── polish_mobile_validator.py # Main validator module
-
-    └── test_polish_mobile_validator.py # Unit tests (unittest)
-
-#### 3. Python Tests (`.github/workflows/python-tests.yml`)```
-
-- Tests on Python 3.8, 3.9, 3.10, 3.11, 3.12
-
-- Runs unittest and pytest with coverage---
-
-- Uploads coverage reports to Codecov
-
-## Data Source
+5. **Test Summary**
+   - Aggregates all test results
+   - Provides comprehensive status report
+   - Fails CI if any test fails
 
 ### Status Badges
 
-The prefix database (`Mobileprefix.csv`) contains detailed mappings of prefixes to specific operators and services. The data is regularly updated to reflect changes in the Polish telecommunications market.
-
-![CI Status](https://github.com/jomardyan/Poland-Mobile-Operator-Prefixes/workflows/CI/badge.svg)
-
-![JavaScript Tests](https://github.com/jomardyan/Poland-Mobile-Operator-Prefixes/workflows/JavaScript%20Tests/badge.svg)---
-
-![Python Tests](https://github.com/jomardyan/Poland-Mobile-Operator-Prefixes/workflows/Python%20Tests/badge.svg)
-
-## Notes
+![Test App Functionalities](https://github.com/jomardyan/Poland-Mobile-Operator-Prefixes/workflows/Test%20App%20Functionalities/badge.svg)
 
 ---
 
-⚠️ **Important Considerations:**
-
 ## 📁 Project Structure
 
-- The numbering ranges may change in the future as new prefixes are allocated
-
-```- Some prefixes have been reassigned between operators over time
-
-Poland-Mobile-Operator-Prefixes/- The M2M prefix (21) is reserved for machine-to-machine communications
-
-├── .github/- Virtual Mobile Network Operators (MVNOs) may use prefixes from their host network
-
-│   └── workflows/              # CI/CD workflows
-
-│       ├── ci.yml             # Main CI pipeline---
-
-│       ├── javascript-tests.yml
-
-│       └── python-tests.yml## License
-
+\`\`\`
+Poland-Mobile-Operator-Prefixes/
+├── .github/
+│   └── workflows/
+│       └── test.yml              # CI/CD pipeline
 ├── javascript/
-
-│   ├── coverage/              # Test coverage reportsMIT License
-
-│   ├── examples.js            # Usage examples
-
-│   ├── package.json           # NPM configuration---
-
-│   ├── polishMobileValidator.js      # Main module
-
-│   └── polishMobileValidator.test.js # Unit tests## Contributing
-
+│   ├── coverage/                 # Test coverage reports
+│   ├── examples.js               # Usage examples
+│   ├── package.json              # NPM configuration
+│   ├── polishMobileValidator.js  # Main module
+│   └── polishMobileValidator.test.js # Unit tests (Jest)
 ├── python/
+│   ├── examples.py               # Usage examples
+│   ├── polish_mobile_validator.py # Main module
+│   ├── requirements.txt          # Python dependencies
+│   └── test_polish_mobile_validator.py # Unit tests (unittest)
+├── .gitignore                    # Git ignore rules
+├── Mobileprefix.csv              # Original prefix database
+├── Mobileprefix_corrected.csv    # Corrected prefix database
+└── README.md                     # This file
+\`\`\`
 
-│   ├── examples.py            # Usage examplesContributions are welcome! Please feel free to submit a Pull Request.
+---
 
-│   ├── polish_mobile_validator.py    # Main module
+## 🤝 Contributing
 
-│   ├── requirements.txt       # Python dependencies---
+Contributions are welcome! Please follow these guidelines:
 
-│   └── test_polish_mobile_validator.py # Unit tests
+### How to Contribute
 
-├── .gitignore                 # Git ignore rules## Support
-
-├── Mobileprefix_corrected.csv # Corrected prefix database
-
-├── Mobileprefix.csv           # Original prefix databaseFor issues, questions, or contributions, please open an issue on GitHub.
-
-└── README.md                  # This file
-
-```---
-
-
-
----## Changelog
-
-
-
-## 🤝 Contributing### Version 1.0.0 (2025)
-
-- Initial release with JavaScript and Python implementations
-
-Contributions are welcome! Please follow these guidelines:- Comprehensive validation and operator recognition
-
-- Full unit test coverage
-
-### How to Contribute- Support for CSV database loading
-
-- Multiple phone number formatting options
-
-1. **Fork** the repository- Batch processing capabilities
-
-2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
-
-3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)---
-
-4. **Push** to the branch (`git push origin feature/AmazingFeature`)
-
-5. **Open** a Pull Request**Developed for validating and recognizing Polish mobile operators** 🇵🇱📱
-
+1. **Fork** the repository
+2. **Create** a feature branch (\`git checkout -b feature/AmazingFeature\`)
+3. **Commit** your changes (\`git commit -m 'Add some AmazingFeature'\`)
+4. **Push** to the branch (\`git push origin feature/AmazingFeature\`)
+5. **Open** a Pull Request
 
 ### Development Setup
 
-```bash
+\`\`\`bash
 # Clone the repository
 git clone https://github.com/jomardyan/Poland-Mobile-Operator-Prefixes.git
 cd Poland-Mobile-Operator-Prefixes
@@ -883,7 +580,7 @@ cd ../python && pip install -r requirements.txt
 # Run tests
 cd ../javascript && npm test
 cd ../python && python test_polish_mobile_validator.py
-```
+\`\`\`
 
 ### Code Standards
 
@@ -897,9 +594,9 @@ cd ../python && python test_polish_mobile_validator.py
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see below for details:
+This project is licensed under the **MIT License**.
 
-```
+\`\`\`
 MIT License
 
 Copyright (c) 2025 Poland Mobile Operator Prefixes
@@ -921,7 +618,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
+\`\`\`
 
 ---
 
@@ -937,9 +634,9 @@ SOFTWARE.
 
 - The numbering ranges may change as new prefixes are allocated
 - Some prefixes have been reassigned between operators over time
-- The M2M prefix (21) is reserved for machine-to-machine communications
+- The M2M prefixes (21, 69) are used for machine-to-machine communications
 - Virtual Mobile Network Operators (MVNOs) may use prefixes from their host network
-- Always use the latest `Mobileprefix_corrected.csv` for accurate operator data
+- Always use the latest \`Mobileprefix_corrected.csv\` for accurate operator data
 
 ---
 
@@ -958,7 +655,7 @@ SOFTWARE.
 
 ## 📈 Statistics
 
-- **Total Prefixes**: 697 (corrected database)
+- **Total Prefixes**: 697+ (corrected database)
 - **Main Operators**: 4
 - **MVNO Operators**: 50+
 - **Test Coverage**: 97%+
