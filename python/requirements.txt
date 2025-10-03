@@ -1,0 +1,5 @@
+# Python requirements for Polish Mobile Validator
+# No external dependencies required for core functionality
+# Testing dependencies (optional)
+pytest>=7.4.0
+pytest-cov>=4.1.0

@@ -1,0 +1,23 @@
+{
+  "name": "polish-mobile-validator",
+  "version": "1.0.0",
+  "description": "Polish mobile number validator and operator recognition framework",
+  "main": "polishMobileValidator.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "poland",
+    "mobile",
+    "phone",
+    "validator",
+    "operator",
+    "prefix"
+  ],
+  "author": "Hayk",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
